@@ -28,13 +28,10 @@ export const createCard = (state, { id, name, description, column }) =>
     .setIn(['id'], id)
     .setIn(['column'], column)
 
-export const rehidrate = state =>
-  Immutable(state, {deep: true})
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_CARD]: createCard,
-  'REHYDRATE': rehidrate
 })
 

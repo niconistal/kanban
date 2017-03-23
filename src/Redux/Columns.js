@@ -40,14 +40,10 @@ export const removeColumn = (state, { id }) =>
       index: removeItemFromArray(state.index, id)
     })
 
-export const rehidrate = state =>
-  Immutable(state, {deep: true})
-
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_COLUMN]: createColumn,
   [Types.REMOVE_COLUMN]: removeColumn,
-  'REHYDRATE': rehidrate
 })
 

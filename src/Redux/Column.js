@@ -24,14 +24,10 @@ export const createColumn = (state, { id, name }) =>
     .setIn(['name'], name)
     .setIn(['id'], id)
 
-export const rehidrate = state =>
-  Immutable(state, {deep: true})
-
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_COLUMN]: createColumn,
-  'REHYDRATE': rehidrate
 })
 
 
