@@ -1,0 +1,7 @@
+.boardCard {
+  border: 1px solid #d3d3d3;
+  padding: 10px;
+}
+.boardCard h3 {
+  text-align: center;
+}

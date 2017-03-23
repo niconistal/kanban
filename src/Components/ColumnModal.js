@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Modal } from '../Components/Modal'
 import { TextField } from 'redux-form-material-ui'
 import FlatButton from 'material-ui/FlatButton'
-import { reduxForm, Field, reset } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import { v1 as uuidV1 } from 'uuid'
 
 const validate = values => {
@@ -17,13 +17,13 @@ class ColumnModal extends Component {
 
   onSubmit = (data) => {
     const id = data.columnId ? data.columnId : uuidV1()
-    this.props.createColumn(id, data.columnName)
+    this.props.onSubmit(id, data.columnName)
     this.props.reset()
     this.props.onHide()
   }
 
   render () {
-    const { open, onHide, handleSubmit, pristine, reset, submitting } = this.props
+    const { open, onHide, handleSubmit } = this.props
 
     const actions = [
       <FlatButton
@@ -46,12 +46,6 @@ class ColumnModal extends Component {
             style={{width: '100%'}}
             component={TextField}
             hintText="Column Name"
-          />
-          <Field
-            name="columnId"
-            style={{width: '100%'}}
-            component={TextField}
-            hintText="Column ID (Optional)"
           />
         </form>
       </Modal>

@@ -8,7 +8,9 @@ import { removeItemFromArray } from '../utils'
 
 const { Types, Creators } = createActions({
   createCard: ['id', 'name', 'description', 'column'],
-  removeCard: ['id']
+  removeCard: ['id'],
+  moveCard: ['id', 'targetColumn'],
+  editCard: ['id', 'name', 'description', 'column']
 }, {})
 
 export const CardsTypes = Types
@@ -39,11 +41,25 @@ export const removeCard = (state, { id }) =>
       data: state.data.without(id),
       index: removeItemFromArray(state.index, id)
     })
+
+export const moveCard = (state, { id, targetColumn }) =>
+  state
+    .setIn(['data', id, 'column'], targetColumn)
+
+export const editCard = (state, { id, name, description, column }) =>
+  state
+    .setIn(['data', id, 'name'], name)
+    .setIn(['data', id, 'description'], description)
+    .setIn(['data', id, 'column'], column)
+
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_CARD]: createCard,
-  [Types.REMOVE_CARD]: removeCard
+  [Types.REMOVE_CARD]: removeCard,
+  [Types.MOVE_CARD]: moveCard,
+  [Types.EDIT_CARD]: editCard,
 })
 
 

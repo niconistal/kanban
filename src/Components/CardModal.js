@@ -3,7 +3,9 @@ import { Modal } from '../Components/Modal'
 import { TextField, SelectField } from 'redux-form-material-ui'
 import FlatButton from 'material-ui/FlatButton'
 import MenuItem from 'material-ui/MenuItem'
-import { reduxForm, Field, reset } from 'redux-form'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { reduxForm, Field } from 'redux-form'
 import { v1 as uuidV1 } from 'uuid'
 
 const validate = values => {
@@ -23,14 +25,19 @@ const validate = values => {
 class CardModal extends Component {
 
   onSubmit = (data) => {
-    const id = data.columnId ? data.columnId : uuidV1()
-    this.props.createCard(id, data.cardName, data.cardDescription, data.columnId)
+    const id = this.props.id ? this.props.id : uuidV1()
+    this.props.onSubmit(id, data.cardName, data.cardDescription, data.columnId)
     this.props.reset()
     this.props.onHide()
   }
 
   render () {
-    const { open, onHide, handleSubmit, pristine, reset, submitting, columns } = this.props
+    const {
+      open,
+      onHide,
+      handleSubmit,
+      columns
+    } = this.props
 
     const actions = [
       <FlatButton
@@ -46,7 +53,7 @@ class CardModal extends Component {
       />,
     ]
     return (
-      <Modal actions={actions} open={open} onHide={onHide} title='Create Column Form'>
+      <Modal actions={actions} open={open} onHide={onHide} title='Column Form'>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Field
             name="cardName"
@@ -59,12 +66,6 @@ class CardModal extends Component {
             style={{width: '100%'}}
             component={TextField}
             hintText="Card Description"
-          />
-          <Field
-            name="cardId"
-            style={{width: '100%'}}
-            component={TextField}
-            hintText="Card ID (Optional)"
           />
           <Field
             name="columnId"
@@ -80,8 +81,23 @@ class CardModal extends Component {
   }
 }
 
-export default reduxForm({
-  form: 'createCard',
-  validate
-})(CardModal)
+const mapStateToProps = (state, { title, description, columnId }) => {
+  const returnValue =  {
+    initialValues: {
+      cardName: title,
+      cardDescription: description,
+      columnId: columnId
+    }
+  }
+  return returnValue
+}
+
+export default compose(
+  connect(mapStateToProps),
+  reduxForm({
+    form: 'createCard',
+    validate,
+    enableReinitialize: true
+  })
+)(CardModal)
 
