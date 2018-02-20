@@ -39,3 +39,4 @@ const checkVersion = () => {
 }
 
 export default { updateReducers, checkVersion }
+

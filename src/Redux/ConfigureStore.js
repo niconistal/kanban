@@ -46,6 +46,5 @@ export default function configureStore(initialState) {
     RehydrationServices.updateReducers(store)
   }
 
-
   return store
 }

@@ -3,7 +3,6 @@ import Immutable from 'seamless-immutable'
 import { reducer as ColumnReducer } from './Column'
 import { removeItemFromArray } from '../utils'
 
-
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
@@ -30,7 +29,6 @@ export const createColumn = (state, action) => {
       data: state.data.merge({[id] : ColumnReducer(undefined, {...action, id: id}) }),
       index: state.index.concat([id])
     })
-
 }
 
 export const removeColumn = (state, { id }) =>

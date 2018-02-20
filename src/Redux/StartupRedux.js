@@ -20,3 +20,4 @@ const rehydrated = (state) => state.set('rehydrated', true)
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.STARTUP]: rehydrated
 })
+

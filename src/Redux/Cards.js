@@ -3,7 +3,6 @@ import Immutable from 'seamless-immutable'
 import { reducer as CardReducer } from './Card'
 import { removeItemFromArray } from '../utils'
 
-
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
@@ -61,5 +60,4 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.MOVE_CARD]: moveCard,
   [Types.EDIT_CARD]: editCard,
 })
-
 

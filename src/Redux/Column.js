@@ -30,4 +30,3 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_COLUMN]: createColumn,
 })
 
-
