@@ -29,3 +29,4 @@ export const hasColumns = createSelector(
   columnsIndex,
   (columnsIndex) => columnsIndex.lenght > 0
 )
+
